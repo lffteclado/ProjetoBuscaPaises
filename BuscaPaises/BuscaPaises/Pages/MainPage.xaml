@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:BuscaPaises;assembly=BuscaPaises"
+             x:Class="BuscaPaises.MainPage"
+             x:Name="RootPage"
+             Title="Todos os Países!">
+    <Page.ToolbarItems>
+        <ToolbarItem x:Name="CallButton"
+                     Command="{Binding CallCommand, Source={x:Reference RootPage}}"
+                     Text="Atualizar" />
+        <ToolbarItem Command="{Binding StatusCommand, Source={x:Reference RootPage}}"
+                     Order="Secondary"
+                     Text="Status" />
+        <ToolbarItem Command="{Binding SearchCommand, Source={x:Reference RootPage}}"
+                     Order="Secondary"
+                     Text="Pesquisar" />
+    </Page.ToolbarItems>
+    <Grid>
+        <ActivityIndicator x:Name="Indicator"
+                           IsRunning="{Binding IsBusy, Source={x:Reference RootPage}}"
+                           />
+        <ScrollView x:FieldModifier="StatusPanel"
+                    VerticalOptions="FillAndExpand"
+                    IsVisible="False"
+                    Padding="10">
+            <Label x:Name="Response"
+                   Text="[Response here]"
+                   />
+
+        </ScrollView>
+        <ListView x:Name="List" ItemsSource="{Binding Countries, Source={x:Reference RootPage}}"
+                  IsPullToRefreshEnabled="True"
+                  IsRefreshing="{Binding IsBusy, Source={x:Reference RootPage}}"
+                  VerticalOptions="FillAndExpand"
+                  RefreshCommand="{Binding CallCommand, Source={x:Reference RootPage}}"
+                  CachingStrategy="RecycleElement"
+                  HasUnevenRows="True">
+            
+        </ListView>
+    </Grid>
+
+</ContentPage>
