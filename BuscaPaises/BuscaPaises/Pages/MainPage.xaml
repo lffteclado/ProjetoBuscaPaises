@@ -36,8 +36,11 @@
                   RefreshCommand="{Binding CallCommand, Source={x:Reference RootPage}}"
                   CachingStrategy="RecycleElement"
                   HasUnevenRows="True">
-            
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <local:ContryCell />
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
     </Grid>
-
 </ContentPage>
